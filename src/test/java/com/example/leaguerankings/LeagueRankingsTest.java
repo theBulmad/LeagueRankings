@@ -1,6 +1,6 @@
 package com.example.leaguerankings;
 
-import AbstractClasses.DefaultAbstract;
+import com.project.leaguerankings.Abstracts.DefaultAbstract;
 import com.project.leaguerankings.Helper.Helper;
 import com.project.leaguerankings.Pojo.ClubObject;
 import com.project.leaguerankings.Pojo.GameResultObject;
@@ -36,7 +36,7 @@ public class LeagueRankingsTest extends DefaultAbstract {
         List<ClubObject> sorted = Helper.sortedClubsByPoints(clubPoints);
 
         logger.info("Sorted Clubs by Points: "+ Arrays.toString(sorted.toArray()));
-        assertTrue(Helper.sortedClubsByPoints(clubPoints).get(0).getName().equals("Team C"));
+        assertEquals("Team C", Helper.sortedClubsByPoints(clubPoints).get(0).getName());
 
     }
 
@@ -44,7 +44,7 @@ public class LeagueRankingsTest extends DefaultAbstract {
     public void testGameResultsWinner(){
         GameResultObject gameResultObject = new GameResultObject("Team A" , 3 , "Team B" , 2);
         logger.info("Team A 3, Team B 2 : "+gameResultObject.getWinner());
-        assertTrue(gameResultObject.getWinner().equals("Team A"));
+        assertEquals("Team A", gameResultObject.getWinner());
     }
 
     @Test
