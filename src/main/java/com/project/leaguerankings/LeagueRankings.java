@@ -13,8 +13,6 @@ public class LeagueRankings{
 
     public LeagueRankings(){
 
-
-
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter 's' to start ('q' to quit)");
         String input = scanner.nextLine().toLowerCase().trim();
@@ -27,11 +25,13 @@ public class LeagueRankings{
                     System.out.println("2. Enter 'd' when done ('q' to quit): ");
 
                     List<String> inputData = Helper.getInputData();
+
                     Map<String, Integer> clubPoints = Helper.generateClubPoints(inputData);
 
                     List<ClubObject> sorted = Helper.sortedClubsByPoints(clubPoints);
 
                     Helper.prettyPrint(sorted);
+
                     break;
                 default:
                     scanner.close();

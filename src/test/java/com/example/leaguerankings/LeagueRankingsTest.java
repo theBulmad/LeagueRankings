@@ -24,7 +24,7 @@ public class LeagueRankingsTest extends DefaultAbstract {
         Map<String, Integer> clubPointsMap = Helper.generateClubPoints(gameResultsTest);
 
         logger.info("Club Points HashMap: "+Helper.generateClubPoints(gameResultsTest).toString());
-        assertEquals(6, (int) clubPointsMap.get("Tarantulas"));
+        assertEquals(3, (int) clubPointsMap.get("Tarantulas"));
 
     }
 
