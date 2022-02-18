@@ -32,5 +32,4 @@ build/
 
 ### VS Code ###
 .vscode/
-
-/testInput.txt
+/dependency-reduced-pom.xml
