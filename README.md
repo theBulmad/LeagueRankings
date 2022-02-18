@@ -8,7 +8,14 @@ Java CLI to generate a log table based on match results
 ### 2. Build
 `cd LeagueRankings`
 
-`mvnw clean package`
+* Windows : `mvnw clean package`
+* OSX/*nix : `./mvnw clean package`
+
+### 2.1 Possible Issues
+> ./mvnw clean package - permission denied 
+
+Fix: `chmod +x mvnw` then test with `./mvnw -v` (can take 5 mins on first try)
+
 
 ### 3. Run
 `java -jar target/LeagueRankings-0.1.0.jar` (or whatever the version number is post successful build)
@@ -17,4 +24,4 @@ Java CLI to generate a log table based on match results
 `mvnw test`
 
 ## Notes
-* Built using java 8
+* Built using java 8 (jdk 1.8)
