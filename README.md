@@ -15,3 +15,6 @@ Java CLI to generate a log table based on match results
 
 ### 4. Isolated tests
 `mvnw test`
+
+## Notes
+* Built using java 8
