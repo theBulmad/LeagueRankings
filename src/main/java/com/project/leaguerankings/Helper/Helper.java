@@ -8,11 +8,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import static com.project.leaguerankings.Globals.Constants.*;
+
 /* General Helper Class to deal with bulk of the work */
 public class Helper {
-
-    private static final int win = 3;
-    private static final int draw = 1;
 
     /* Handles input from stdin into list of lines */
     public static List<String> getInputData(){
@@ -22,16 +21,15 @@ public class Helper {
 
         String inputLine;
         while(!(inputLine = scanner.nextLine()).isEmpty()){
-            if(inputLine.equalsIgnoreCase("d") || inputLine.isEmpty()){
+            if(inputLine.equalsIgnoreCase(DONE_COMMAND)){
                 break;
             }
-            else if(inputLine.equalsIgnoreCase("q")){
+            else if(inputLine.equalsIgnoreCase(QUIT_COMMAND)){
                 scanner.close();
                 System.exit(0);
             }
             inputData.add(inputLine.trim());
         }
-        //scanner.close();
 
         return inputData;
     }
@@ -44,7 +42,7 @@ public class Helper {
         for(String line: gameResults){ //reading game results input data into gameresult obj
             String game[] = line.split(",");
 
-            Pattern pattern = Pattern.compile("[a-zA-Z]+\\s+[a-zA-Z]+ \\d"); //helps in situations where there is teams with FC or United
+            Pattern pattern = Pattern.compile(CLUBNAME_MULTIPLE_WHITESPACE_REGEX); //helps in situations where there is teams with FC or United
 
             Matcher checkHomeString = pattern.matcher(game[0].trim());
             String home[];
@@ -73,13 +71,13 @@ public class Helper {
             //add points for winners and draws
             if(gameResultObject.isDraw()){
                 if(clubPointsMap.containsKey(home[0])){
-                    clubPointsMap.put(home[0] , clubPointsMap.get(home[0]) + draw);
+                    clubPointsMap.put(home[0] , clubPointsMap.get(home[0]) + DRAW);
                 }else{
                     clubPointsMap.put(home[0] , 1);
                 }
 
                 if(clubPointsMap.containsKey(away[0])){
-                    clubPointsMap.put(away[0] , clubPointsMap.get(away[0]) + draw);
+                    clubPointsMap.put(away[0] , clubPointsMap.get(away[0]) + DRAW);
                 }else{
                     clubPointsMap.put(away[0] , 1);
                 }
@@ -87,10 +85,10 @@ public class Helper {
             else{
                 String winner = gameResultObject.getWinner();
                 if(clubPointsMap.containsKey(winner)){
-                    clubPointsMap.put(winner , clubPointsMap.get(winner) + win);
+                    clubPointsMap.put(winner , clubPointsMap.get(winner) + WIN);
                 }
                 else{
-                    clubPointsMap.put(winner , win);
+                    clubPointsMap.put(winner , WIN);
                 }
 
                 String loser = gameResultObject.getLoser();
