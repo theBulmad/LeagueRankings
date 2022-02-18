@@ -13,6 +13,10 @@ import static com.project.leaguerankings.Globals.Constants.*;
 /* General Helper Class to deal with bulk of the work */
 public class Helper {
 
+    private Helper(){
+        throw new IllegalStateException("Helper class");
+    }
+
     /* Handles input from stdin into list of lines */
     public static List<String> getInputData(){
         Scanner scanner = new Scanner(System.in);
@@ -40,47 +44,23 @@ public class Helper {
         Map<String, Integer> clubPointsMap = new HashMap<>();
 
         for(String line: gameResults){ //reading game results input data into gameresult obj
-            String game[] = line.split(",");
+            String[] game = line.split(",");
 
             Pattern pattern = Pattern.compile(CLUBNAME_MULTIPLE_WHITESPACE_REGEX); //helps in situations where there is teams with FC or United
 
             Matcher checkHomeString = pattern.matcher(game[0].trim());
-            String home[];
-            if(checkHomeString.find()){
-                home = game[0].trim().split(" ");
-                StringBuilder tmp = new StringBuilder(home[0] + " " + home[1]);
-                home[0] = tmp.toString();
-                home[1] = home[home.length - 1];
-            }else{
-                home = game[0].trim().split(" ");
-            }
+            String[] home = getClubAndPointsArr(checkHomeString, game, 0);
+
 
             Matcher checkAwayString = pattern.matcher(game[1].trim());
-            String away[];
-            if(checkAwayString.find()) {
-                away = game[1].trim().split(" ");
-                StringBuilder tmp = new StringBuilder(away[0] + " " + away[1]);
-                away[0] = tmp.toString();
-                away[1] = away[away.length - 1];
-            }else{
-                away = game[1].trim().split(" ");
-            }
+            String[] away = getClubAndPointsArr(checkAwayString, game, 1);
 
             GameResultObject gameResultObject = new GameResultObject(home[0], Integer.parseInt(home[1]), away[0], Integer.parseInt(away[1]));
 
             //add points for winners and draws
             if(gameResultObject.isDraw()){
-                if(clubPointsMap.containsKey(home[0])){
-                    clubPointsMap.put(home[0] , clubPointsMap.get(home[0]) + DRAW);
-                }else{
-                    clubPointsMap.put(home[0] , 1);
-                }
-
-                if(clubPointsMap.containsKey(away[0])){
-                    clubPointsMap.put(away[0] , clubPointsMap.get(away[0]) + DRAW);
-                }else{
-                    clubPointsMap.put(away[0] , 1);
-                }
+                updateDraw(clubPointsMap , home[0]);
+                updateDraw(clubPointsMap, away[0]);
             }
             else{
                 String winner = gameResultObject.getWinner();
@@ -92,9 +72,8 @@ public class Helper {
                 }
 
                 String loser = gameResultObject.getLoser();
-                if(!clubPointsMap.containsKey(loser)){
-                    clubPointsMap.put(loser , 0);
-                }
+                clubPointsMap.putIfAbsent(loser, 0);
+
             }
 
         }
@@ -118,7 +97,7 @@ public class Helper {
     }
 
     /* Prints sorted list of clubs in the desired output format */
-    public static void PrettyPrint(List<ClubObject> sorted){
+    public static void prettyPrint(List<ClubObject> sorted){
         int pos = 1; //stores current rank
         int prevPoints = -1; //stores previous points
         int counter = 0; //stores position counter to skip by when previous clubs have the same points/position
@@ -142,6 +121,27 @@ public class Helper {
 
             pos++;
 
+        }
+    }
+
+    private static String []getClubAndPointsArr(Matcher checkString, String[] game, int indx){
+        String[] clubAndPoints;
+        if(checkString.find()){
+            clubAndPoints = game[indx].trim().split(" ");
+            clubAndPoints[0] = clubAndPoints[0] + " " + clubAndPoints[1];
+            clubAndPoints[1] = clubAndPoints[clubAndPoints.length - 1];
+        }else{
+            clubAndPoints = game[indx].trim().split(" ");
+        }
+
+        return clubAndPoints;
+    }
+
+    private static void updateDraw(Map<String, Integer> clubPointsMap , String clubAndPoints){
+        if(clubPointsMap.containsKey(clubAndPoints)){
+            clubPointsMap.put(clubAndPoints , clubPointsMap.get(clubAndPoints) + DRAW);
+        }else{
+            clubPointsMap.put(clubAndPoints , 1);
         }
     }
 

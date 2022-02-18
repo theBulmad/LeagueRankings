@@ -21,7 +21,10 @@ public class LeagueRankingsTest extends DefaultAbstract {
         gameResultsTest.add("Lions 1, FC Awesome 1");
         gameResultsTest.add("Lions 4, Grouches 0");
 
+        Map<String, Integer> clubPointsMap = Helper.generateClubPoints(gameResultsTest);
+
         logger.info("Club Points HashMap: "+Helper.generateClubPoints(gameResultsTest).toString());
+        assertEquals(6, (int) clubPointsMap.get("Tarantulas"));
 
     }
 

@@ -31,7 +31,7 @@ public class LeagueRankings{
 
                     List<ClubObject> sorted = Helper.sortedClubsByPoints(clubPoints);
 
-                    Helper.PrettyPrint(sorted);
+                    Helper.prettyPrint(sorted);
                     break;
                 default:
                     scanner.close();
