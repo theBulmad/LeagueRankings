@@ -14,15 +14,15 @@ public class LeagueRankings{
     public LeagueRankings(){
 
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter 's' to start ('q' to quit)");
+        System.out.println("Input 's' and press the enter key to start the League Rankings processor:");
         String input = scanner.nextLine().toLowerCase().trim();
 
         while(!input.equalsIgnoreCase(QUIT_COMMAND) && !input.isEmpty()){
             switch (input.toUpperCase()){
                 case START_COMMAND:
                 case YES_COMMAND:
-                    System.out.println("1. Copy and paste input data for match results and press enter: ");
-                    System.out.println("2. Enter 'd' when done ('q' to quit): ");
+                    System.out.println("1. Copy and paste all the input data for table rankings then press enter:");
+                    System.out.println("2. Input 'd' then press the enter key when done (Input 'q' then enter to quit");
 
                     List<String> inputData = Helper.getInputData();
 
