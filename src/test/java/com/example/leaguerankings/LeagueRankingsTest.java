@@ -7,7 +7,6 @@ import com.project.leaguerankings.Pojo.GameResultObject;
 import org.junit.Test;
 
 import java.util.*;
-
 import static org.junit.Assert.*;
 
 public class LeagueRankingsTest extends DefaultAbstract {
@@ -36,10 +35,10 @@ public class LeagueRankingsTest extends DefaultAbstract {
         clubPoints.put("Team C" , 9);
         clubPoints.put("Team D" , 0);
 
-        List<ClubObject> sorted = Helper.sortedClubsByPoints(clubPoints);
+        List<ClubObject> sorted = Helper.sortClubsByPoints(clubPoints);
 
         logger.info("Sorted Clubs by Points: "+ Arrays.toString(sorted.toArray()));
-        assertEquals("Team C", Helper.sortedClubsByPoints(clubPoints).get(0).getName());
+        assertEquals("Team C", Helper.sortClubsByPoints(clubPoints).get(0).getName());
 
     }
 
@@ -56,8 +55,5 @@ public class LeagueRankingsTest extends DefaultAbstract {
         logger.info("Team A 1, Team B 1 : Draw");
         assertTrue(gameResultObject.isDraw());
     }
-
-
-
 
 }

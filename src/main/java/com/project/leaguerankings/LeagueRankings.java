@@ -22,13 +22,13 @@ public class LeagueRankings{
                 case START_COMMAND:
                 case YES_COMMAND:
                     System.out.println("1. Copy and paste all the input data for table rankings then press enter:");
-                    System.out.println("2. Input 'd' then press the enter key when done (Input 'q' then enter to quit");
+                    System.out.println("2. Input 'd' then press the enter key when done (Input 'q' then enter to quit)");
 
                     List<String> inputData = Helper.getInputData();
 
                     Map<String, Integer> clubPoints = Helper.generateClubPoints(inputData);
 
-                    List<ClubObject> sorted = Helper.sortedClubsByPoints(clubPoints);
+                    List<ClubObject> sorted = Helper.sortClubsByPoints(clubPoints);
 
                     Helper.prettyPrint(sorted);
 

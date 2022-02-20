@@ -83,7 +83,7 @@ public class Helper {
     }
 
     /* Returns a sorted list of clubs by points desc then name asc */
-    public static List<ClubObject> sortedClubsByPoints(Map<String, Integer> clubPoints){
+    public static List<ClubObject> sortClubsByPoints(Map<String, Integer> clubPoints){
         List<ClubObject> clubs = new ArrayList<>();
         for(Map.Entry<String, Integer> e: clubPoints.entrySet()){
             clubs.add(new ClubObject(e.getKey() , e.getValue()));
@@ -124,6 +124,7 @@ public class Helper {
         }
     }
 
+    /* Returns array with club and points e.g. [FC Awesome, 6] */
     private static String []getClubAndPointsArr(Matcher checkString, String[] game, int indx){
         String[] clubAndPoints;
         if(checkString.find()){
